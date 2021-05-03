@@ -5,6 +5,16 @@ cwd_path = os.getcwd()
 file_path = 'files'
 
 
+def recursive_binary_search(seq, number, left, right):
+    middle = (right + left) // 2
+    if number < seq[middle]:
+        return recursive_binary_search(seq, number, left, middle - 1)
+    elif number > seq[middle]:
+        return recursive_binary_search(seq, number, middle + 1, right)
+    else:
+        return middle
+
+
 def read_data(file_name, key='ordered_numbers'):
     """
     Reads json file and returns sequential data.
@@ -48,6 +58,8 @@ def main(file_name, number):
     # iterative binary search
     binary_search(sequence, number=number)
 
+    idx = recursive_binary_search(sequence, number, 0, len(sequence) - 1)
+    print(idx)
 
 if __name__ == '__main__':
     my_file = 'sequential.json'
